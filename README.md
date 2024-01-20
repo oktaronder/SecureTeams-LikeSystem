@@ -1,6 +1,6 @@
 # Secure Teams-Like System (STLS)
 
-![STLS Logo](images/logo.png)
+![Login Page](screenshots/login_page.png) 
 
 ## 📖 Description
 
