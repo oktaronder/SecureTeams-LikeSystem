@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Group</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create_group.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Create New Group</h1>
+
+        {% with messages = get_flashed_messages(category_filter=['group_message']) %}
+        {% if messages %}
+            <div class="flashes">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form class="create-group-form" method="POST" action="{{ url_for('create_group') }}">
+            <div class="form-group">
+                <label for="group_name">Group Name:</label>
+                <input type="text" id="group_name" name="group_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="group_description">Group Description:</label>
+                <textarea id="group_description" name="group_description" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Group</button>
+        </form>
+    </div>
+
+

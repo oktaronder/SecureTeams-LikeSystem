@@ -1,0 +1,19 @@
+<!-- templates/user_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ user.username }}'s Profile</title>
+    <!-- Stil ve diğer head içerikleri -->
+</head>
+<body>
+    <h1>{{ user.username }}'s Profile</h1>
+    <p>Role: {{ user.role }}</p>
+    <img src="{{ user.profile_pic or url_for('static', filename='images/default_user.png') }}" alt="Profile Picture">
+
+    <h2>Update Profile Picture</h2>
+    <form action="{{ url_for('update_profile_pic', user_id=user._id) }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="profile_pic">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>

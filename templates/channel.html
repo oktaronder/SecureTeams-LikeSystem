@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanal Mesajları</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/channel.css') }}">
+</head>
+<body>
+
+<div class="chat-container">
+    <header class="chat-header">
+        <div class="channel-name">{{ channel_name }}</div>
+    </header>
+
+    <div class="chat-messages">
+        {% for message in messages %}
+        <div class="message">
+            <img src="{{ message.user_image }}" alt="Avatar" class="message-avatar">
+            <div class="message-content">
+                <div class="message-header">
+                    <h5 class="message-author">{{ message.author }}</h5>
+                    <!-- Burada mesajın zaman damgasını ekleyebilirim vakit kalırsa -->
+                    <!-- <span class="message-timestamp">{{ message.timestamp }}</span> -->
+                </div>
+                <p class="message-text">{{ message.text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form class="chat-form" action="{{ url_for('send_message', group_id=group_id, channel_name=channel_name) }}" method="POST">
+        <input type="text" name="message" placeholder="Write your message" required>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+</body>
+</html>

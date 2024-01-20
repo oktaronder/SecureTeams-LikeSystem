@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="user-info">
+            <img src="{{ session['user_image'] }}" alt="User Image" class="user-image">
+            <span class="user-name">{{ session['username'] }}</span>
+        </div>
+        {% if session['role'] == 'teacher' %}
+        <div class="team-actions">
+            <a href="{{ url_for('create_group') }}" class="create-team-button">Create Team or Join a Team</a>
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="dashboard-content">
+        {% for group in groups %}
+        <div class="group-card">
+            <div class="group-card-content">
+                <div class="group-logo">
+                    <img src="{{ group.logo_url }}" alt="{{ group.name }}">
+                </div>
+                <h2 class="group-title">{{ group.name }}</h2>
+                <div class="group-card-menu">
+                    <button class="menu-button" onclick="showMenu('{{ group._id }}')">⋮</button>
+                    <div class="group-menu" id="menu-{{ group._id }}" style="display: none;">
+                        <form action="{{ url_for('delete_group', group_id=group._id) }}" method="post">
+                            <button type="submit" class="menu-item">Delete Group</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="group-card-actions">
+                <a href="{{ url_for('group', group_id=group._id) }}">Go to Group</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <script>
+        function showMenu(groupId) {
+            var menu = document.getElementById('menu-' + groupId);
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        var modal = document.getElementById("messageModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        {% for message in get_flashed_messages() %}
+            document.getElementById("modalText").innerText = "{{ message }}";
+            modal.style.display = "block";
+        {% endfor %}
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

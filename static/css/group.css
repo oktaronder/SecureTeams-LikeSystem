@@ -1,0 +1,204 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f8;
+    color: #333;
+}
+
+.top-bar {
+    background-color: #464775;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-image {
+    border-radius: 50%;
+    width: 40px;
+    margin-right: 15px;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.group-actions {
+    display: flex;
+}
+
+.btn.btn-action {
+    background-color: #5c6bc0;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn.btn-action:hover {
+    background-color: #7986cb;
+}
+
+.group-content {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.group-banner {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.group-banner-image {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.group-details {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.group-title {
+    font-size: 28px;
+    color: #464775;
+    margin-bottom: 10px;
+}
+
+.group-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.channels-section {
+    padding: 0 20px;
+}
+
+.channels-section h2 {
+    color: #464775;
+    margin-bottom: 10px;
+}
+
+.channels-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.channel-item {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.channel-link {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.channel-link:hover {
+    background-color: #bdbdbd;
+}
+
+.channel-menu {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.menu-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.menu-button:hover + .menu-content,
+.menu-content:hover {
+    display: block;
+}
+
+.delete-button {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.delete-button:hover {
+    background-color: #ff5252;
+}
+
+/* Modal Stili */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

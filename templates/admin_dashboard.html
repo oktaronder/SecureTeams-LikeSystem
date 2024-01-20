@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #464775;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .logout-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .action-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .action-card a {
+            text-decoration: none;
+            color: #6264a7;
+            font-weight: bold;
+        }
+        .action-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome, {{ session['username'] }} (Admin)</h1>
+        <button class="logout-button" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+    </div>
+
+    <div class="actions">
+        <div class="action-card">
+            <h3>Add User</h3>
+            <p>Add a new user to the system.</p>
+            <a href="{{ url_for('add_user') }}">Go to Add User</a>
+        </div>
+        <div class="action-card">
+            <h3>Update DES Key</h3>
+            <p>Update the DES encryption key.</p>
+            <a href="{{ url_for('update_des_key') }}">Go to Update Key</a>
+        </div>
+        <!-- Daha fazla eylem kartı eklenebilir -->
+    </div>
+</body>
+</html>
+

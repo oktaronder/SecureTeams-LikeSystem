@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_user.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>User Registration Form</h1>
+    </div>
+
+    <div class="container">
+        <div class="back-to-dashboard">
+            <a href="{{ url_for('admin_dashboard') }}" class="back-button">Main Menu</a>
+        </div>
+
+        <form action="/add_user" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Add User" class="submit-btn">
+        </form>
+    </div>
+
+    <!-- Modal Pop-up for Flash Messages -->
+    <div id="flashModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("flashModal");
+        var span = document.getElementsByClassName("close")[0];
+        var modalText = document.getElementById("modalText");
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            var message = "{{ messages[0][1] }}";
+            modalText.innerText = message;
+            modal.style.display = "block";
+        {% endif %}
+        {% endwith %}
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

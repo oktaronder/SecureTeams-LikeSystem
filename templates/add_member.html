@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Member</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_member.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Add Member Form</h1>
+
+        <form class="add-member-form" method="POST" action="{{ url_for('add_member', group_id=group_id) }}">
+            <div class="form-group">
+                <label for="member_email">Member Email:</label>
+                <input type="email" id="member_email" name="member_email" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Member</button>
+        </form>
+    </div>
+
+    <!-- Modal Pop-up -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("errorModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        {% with messages = get_flashed_messages(category_filter=['member_error']) %}
+        {% if messages %}
+            var message = "{{ messages[0] }}";
+            document.getElementById("modalText").innerText = message;
+            modal.style.display = "block";
+        {% endif %}
+        {% endwith %}
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

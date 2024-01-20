@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ group.name }} - Group Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/group.css') }}">
+</head>
+<body>
+
+<header class="top-bar">
+    <div class="user-info">
+        <img src="{{ session['user_image'] }}" alt="User Image" class="user-image">
+        <span class="user-name">{{ session['username'] }}</span>
+    </div>
+    {% if session['role'] == 'teacher' %}
+    <div class="group-actions">
+        <a href="{{ url_for('add_member', group_id=group._id) }}" class="btn btn-action">Add Member</a>
+        <a href="{{ url_for('add_channel', group_id=group._id) }}" class="btn btn-action">Add Channel</a>
+    </div>
+    {% elif session['role'] == 'student' %}
+    <div class="group-actions">
+        <a href="{{ url_for('add_channel', group_id=group._id) }}" class="btn btn-action">Add Channel</a>
+    </div>
+    {% endif %}
+</header>
+
+<main class="group-content">
+    <div class="group-banner">
+        <img src="{{ group.logo_url or url_for('static', filename='images/group_banner.jpg') }}" alt="Group Banner" class="group-banner-image">
+    </div>
+    <div class="group-details">
+        <h1 class="group-title">{{ group.name }}</h1>
+        <p class="group-description">{{ group.description or 'No description provided for this group.' }}</p>
+    </div>
+
+    <section class="channels-section">
+        <h2>Channels</h2>
+        <div class="channels-list">
+            {% for channel in group.channels %}
+            <div class="channel-item">
+                <a href="{{ url_for('channel', group_id=group._id, channel_name=channel) }}" class="channel-link">
+                    {{ channel }}
+                </a>
+                <div class="channel-menu">
+                    {% if session['role'] == 'teacher' or session['role'] == 'student' %}
+                    <button class="menu-button">☰</button>
+                    <div class="menu-content">
+                        <form action="{{ url_for('delete_channel', group_id=group._id, channel_name=channel) }}" method="post">
+                            <button class="delete-button" type="submit">Delete Channel</button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalText"></p>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById("messageModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    {% for message in get_flashed_messages() %}
+        document.getElementById("modalText").innerText = "{{ message }}";
+        modal.style.display = "block";
+    {% endfor %}
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

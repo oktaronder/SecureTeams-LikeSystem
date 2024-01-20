@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update DES Key</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #464775;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .update-button {
+            background-color: #4CAF50; /* Yeşil renk */
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .update-button:hover {
+            background-color: #43A047;
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            color: #464775; /* Metin rengi değiştirildi */
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            animation: modalopen 0.5s;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes modalopen {
+            from {top: -300px; opacity: 0}
+            to {top: 50%; opacity: 1}
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button class="update-button" onclick="showUpdateModal()">Update DES Key</button>
+    </div>
+
+    <!-- Modal Pop-up -->
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>DES Key Updated</h2>
+            <p>The data in the database has been encrypted with the new key.</p>
+        </div>
+    </div>
+
+    <script>
+        function showUpdateModal() {
+            document.getElementById("updateModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("updateModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("updateModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
