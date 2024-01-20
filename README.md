@@ -23,7 +23,7 @@ To get STLS up and running on your local machine, follow these steps:
 
 2. **Navigate to the Project Directory**
    ```bash
-   cd SecureTeamsEduHub
+   cd SecureTeams-LikeSystem
 3. **Create and Activate a Virtual Environment**
    ```bash
    python -m venv venv
